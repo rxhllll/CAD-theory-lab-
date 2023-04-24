@@ -76,7 +76,7 @@ def display_news(list_of_news, news_quantity):
 
 
 def run():
-    st.title("InNews🇮🇳: A Summarised News📰")
+    st.title("InNews🇮🇳: A Summarised News")
     image = Image.open('./Meta/newspaper.png')
 
     col1, col2, col3 = st.columns([3, 5, 3])
@@ -89,12 +89,12 @@ def run():
 
     with col3:
         st.write("")
-    category = ['--Select--', 'Trending🔥 News', 'Favourite💙 Topics', 'Search🔍 Topic']
+    category = ['--Select--', 'Trending News', 'Favourite Topics', 'Search Topic']
     cat_op = st.selectbox('Select your Category', category)
     if cat_op == category[0]:
         st.warning('Please select Type!!')
     elif cat_op == category[1]:
-        st.subheader("✅ Here is the Trending🔥 news for you")
+        st.subheader(" Here is the Trending news for you")
         no_of_news = st.slider('Number of News:', min_value=5, max_value=25, step=1)
         news_list = fetch_top_news()
         display_news(news_list, no_of_news)
@@ -109,25 +109,25 @@ def run():
             no_of_news = st.slider('Number of News:', min_value=5, max_value=25, step=1)
             news_list = fetch_category_news(chosen_topic)
             if news_list:
-                st.subheader("✅ Here are the some {} News for you".format(chosen_topic))
+                st.subheader(" Here are the some {} News for you".format(chosen_topic))
                 display_news(news_list, no_of_news)
             else:
                 st.error("No News found for {}".format(chosen_topic))
 
     elif cat_op == category[3]:
-        user_topic = st.text_input("Enter your Topic🔍")
+        user_topic = st.text_input("Enter your Topic")
         no_of_news = st.slider('Number of News:', min_value=5, max_value=15, step=1)
 
         if st.button("Search") and user_topic != '':
             user_topic_pr = user_topic.replace(' ', '')
             news_list = fetch_news_search_topic(topic=user_topic_pr)
             if news_list:
-                st.subheader("✅ Here are the some {} News for you".format(user_topic.capitalize()))
+                st.subheader(" Here are the some {} News for you".format(user_topic.capitalize()))
                 display_news(news_list, no_of_news)
             else:
                 st.error("No News found for {}".format(user_topic))
         else:
-            st.warning("Please write Topic Name to Search🔍")
+            st.warning("Please write Topic Name to Search")
 
 
 run()
